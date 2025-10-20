@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Study Plan Template</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0.75in;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .page {
+            page-break-after: always;
+            min-height: 10in;
+        }
+        
+        .page:last-child {
+            page-break-after: avoid;
+        }
+        
+        .cover {
+            text-align: center;
+            padding: 2in 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin: -0.75in -0.75in 0 -0.75in;
+            padding: 2in 0.75in;
+        }
+        
+        .cover h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .cover h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .cover p {
+            font-size: 1.125rem;
+            opacity: 0.8;
+        }
+        
+        .content {
+            padding: 0.5in 0;
+        }
+        
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #374151;
+            margin: 2rem 0 1rem 0;
+        }
+        
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #4b5563;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: #4b5563;
+        }
+        
+        .profile-box {
+            background: #f8fafc;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .profile-box h3 {
+            color: #667eea;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .profile-item {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-label {
+            font-weight: 600;
+            color: #374151;
+            width: 120px;
+        }
+        
+        .profile-value {
+            color: #4b5563;
+        }
+        
+        .timeline {
+            margin: 2rem 0;
+        }
+        
+        .timeline-item {
+            margin-bottom: 2rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1.5rem;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: #e5e7eb;
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        .timeline-week {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 1.125rem;
+        }
+        
+        .timeline-content {
+            margin-top: 0.5rem;
+        }
+        
+        .mistakes-box {
+            background: #fef2f2;
+            border: 2px solid #fecaca;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .mistakes-box h3 {
+            color: #dc2626;
+            margin-top: 0;
+        }
+        
+        .mistake-item {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .mistake-item::before {
+            content: '⚠️';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .coaching-box {
+            background: #f0f4ff;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .coaching-box h3 {
+            color: #667eea;
+            margin-top: 0;
+        }
+        
+        .benefit-item {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .benefit-item::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .cta-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .cta-box h3 {
+            color: white;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        .cta-box p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-button {
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .checklist {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .checklist h3 {
+            margin-top: 0;
+            color: #374151;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        
+        .checklist-item input[type="checkbox"] {
+            margin-right: 0.75rem;
+            transform: scale(1.2);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cover Page -->
+    <div class="page cover">
+        <h1>Your Personalized IELTS Study Plan</h1>
+        <h2 id="targetBand">Band 7.5 Roadmap</h2>
+        <p id="timelineText">6-Week Intensive Preparation</p>
+        <p id="studentName">Prepared for: [Student Name]</p>
+    </div>
+
+    <!-- Page 2: Diagnostic Summary -->
+    <div class="page content">
+        <h1>Your IELTS Profile</h1>
+        
+        <div class="profile-box">
+            <h3>📊 Your Assessment Results</h3>
+            <div class="profile-item">
+                <span class="profile-label">Target Band:</span>
+                <span class="profile-value" id="profileTargetBand">7.5</span>
+            </div>
+            <div class="profile-item">
+                <span class="profile-label">Timeline:</span>
+                <span class="profile-value" id="profileTimeline">6 weeks</span>
+            </div>
+            <div class="profile-item">
+                <span class="profile-label">Weak Section:</span>
+                <span class="profile-value" id="profileWeakSection">Writing</span>
+            </div>
+            <div class="profile-item">
+                <span class="profile-label">Study Time:</span>
+                <span class="profile-value" id="profileStudyTime">1-2 hours daily</span>
+            </div>
+            <div class="profile-item">
+                <span class="profile-label">Biggest Challenge:</span>
+                <span class="profile-value" id="profileChallenge">No structured plan</span>
+            </div>
+        </div>
+
+        <p>Based on your responses, we've created a customized study plan that addresses your specific needs and timeline. This plan is designed to help you overcome your biggest obstacles and reach your target band score efficiently.</p>
+    </div>
+
+    <!-- Page 3-4: Study Roadmap -->
+    <div class="page content">
+        <h1>Your Custom Study Roadmap</h1>
+        
+        <div class="timeline" id="studyTimeline">
+            <!-- Timeline will be populated based on quiz answers -->
+        </div>
+    </div>
+
+    <!-- Page 5: Common Mistakes -->
+    <div class="page content">
+        <h1>Why Most Self-Study Plans Fail</h1>
+        
+        <div class="mistakes-box">
+            <h3>🚨 Critical Mistakes to Avoid</h3>
+            <div class="mistake-item">
+                <strong>No personalized feedback on Writing tasks</strong> - You can't see your own errors and improve without expert guidance
+            </div>
+            <div class="mistake-item">
+                <strong>Generic study materials don't address your specific band-gap issues</strong> - One-size-fits-all approaches waste precious time
+            </div>
+            <div class="mistake-item">
+                <strong>Lack of speaking practice with real examiners</strong> - This leads to last-minute panic and underperformance
+            </div>
+            <div class="mistake-item">
+                <strong>Poor time management in Reading and Writing sections</strong> - Without proper strategies, you'll run out of time
+            </div>
+        </div>
+
+        <p>These mistakes are exactly why 70% of IELTS test-takers don't reach their target band on the first attempt. The good news? With the right guidance and structured approach, you can avoid these pitfalls entirely.</p>
+    </div>
+
+    <!-- Page 6: Coaching Benefits -->
+    <div class="page content">
+        <h1>How Expert Coaching Accelerates Your Results</h1>
+        
+        <div class="coaching-box">
+            <h3>🎯 What You Get with Professional IELTS Coaching</h3>
+            <div class="benefit-item">
+                <strong>Expert feedback on every Writing task within 24 hours</strong> - Identify and fix errors before they become habits
+            </div>
+            <div class="benefit-item">
+                <strong>Weekly 1-on-1 Speaking mock interviews</strong> - Practice with certified trainers who know exactly what examiners look for
+            </div>
+            <div class="benefit-item">
+                <strong>Customized study plans adjusted weekly</strong> - Your plan evolves based on your progress and changing needs
+            </div>
+            <div class="benefit-item">
+                <strong>Proven strategies for each section</strong> - Learn the exact techniques that helped 500+ students reach their target bands
+            </div>
+            <div class="benefit-item">
+                <strong>Confidence building and test anxiety management</strong> - Overcome the mental barriers that hold most students back
+            </div>
+        </div>
+
+        <div style="background: #f0f9ff; border: 1px solid #0ea5e9; border-radius: 8px; padding: 1rem; margin: 1.5rem 0;">
+            <p><strong>Success Story:</strong> "Sarah improved from Band 6.0 to 7.5 in just 6 weeks using this exact approach. She was struggling with Writing Task 2 structure, just like you mentioned. With personalized feedback and weekly practice, she not only reached her target but exceeded it!" - <em>IELTS Success Graduate</em></p>
+        </div>
+    </div>
+
+    <!-- Page 7: Next Steps CTA -->
+    <div class="page content">
+        <h1>Ready to Start Your IELTS Success Journey?</h1>
+        
+        <div class="cta-box">
+            <h3>Book Your Free 15-Minute Band Score Consultation</h3>
+            <p>Get a personalized coaching roadmap and discover exactly how to reach your target band in your timeline</p>
+            <a href="#" class="cta-button">Book Free Consultation</a>
+        </div>
+
+        <h2>Alternative: Join Our Next Masterclass</h2>
+        <p><strong>"How to Jump 1 Band in Writing in 3 Weeks"</strong></p>
+        <p>Live session: This Saturday at 2 PM (GMT)</p>
+        <p>Limited to 20 participants - Only 5 spots left!</p>
+        
+        <div style="background: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+            <p><strong>Early Bird Special:</strong> Book your consultation this week and get 20% off your first month of coaching + free access to our vocabulary mastery course (worth $97).</p>
+        </div>
+    </div>
+
+    <!-- Page 8: Bonus Resources -->
+    <div class="page content">
+        <h1>Bonus: Your IELTS Success Checklist</h1>
+        
+        <div class="checklist">
+            <h3>📋 Pre-Study Checklist</h3>
+            <div class="checklist-item">
+                <input type="checkbox" id="check1">
+                <label for="check1">Set up a dedicated study space with minimal distractions</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check2">
+                <label for="check2">Download official IELTS practice materials</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check3">
+                <label for="check3">Create a study schedule and set daily reminders</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check4">
+                <label for="check4">Find a study partner or join our community group</label>
+            </div>
+        </div>
+
+        <div class="checklist">
+            <h3>📚 Essential Resources</h3>
+            <div class="checklist-item">
+                <input type="checkbox" id="check5">
+                <label for="check5">Official IELTS Practice Tests (Cambridge)</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check6">
+                <label for="check6">IELTS Vocabulary Builder App</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check7">
+                <label for="check7">Speaking practice with native speakers</label>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" id="check8">
+                <label for="check8">Timer app for practice sessions</label>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>This study plan was created specifically for you based on your quiz responses.</p>
+            <p>Questions? Reply to this email or book a consultation to get personalized guidance.</p>
+            <p><strong>IELTS Success Coaching</strong> | www.ieltssuccess.com | hello@ieltssuccess.com</p>
+        </div>
+    </div>
+
+    <script>
+        // This script would be used to populate the PDF with actual quiz data
+        function populatePDF(quizData) {
+            // Update cover page
+            document.getElementById('targetBand').textContent = `Band ${quizData.targetScore} Roadmap`;
+            document.getElementById('timelineText').textContent = getTimelineText(quizData.timeline);
+            document.getElementById('studentName').textContent = `Prepared for: ${quizData.firstName}`;
+            
+            // Update profile
+            document.getElementById('profileTargetBand').textContent = quizData.targetScore;
+            document.getElementById('profileTimeline').textContent = getTimelineText(quizData.timeline);
+            document.getElementById('profileWeakSection').textContent = capitalizeFirst(quizData.weakSection);
+            document.getElementById('profileStudyTime').textContent = getStudyTimeText(quizData.studyTime);
+            document.getElementById('profileChallenge').textContent = capitalizeFirst(quizData.challenge);
+            
+            // Generate timeline based on answers
+            generateTimeline(quizData);
+        }
+
+        function getTimelineText(timeline) {
+            switch(timeline) {
+                case 'urgent': return '2-4 Week Intensive';
+                case 'moderate': return '6-8 Week Standard';
+                case 'relaxed': return '12+ Week Comprehensive';
+                default: return '6-Week Standard';
+            }
+        }
+
+        function getStudyTimeText(studyTime) {
+            switch(studyTime) {
+                case 'minimal': return '30-60 minutes daily';
+                case 'moderate': return '1-2 hours daily';
+                case 'intensive': return '2+ hours daily';
+                default: return '1-2 hours daily';
+            }
+        }
+
+        function capitalizeFirst(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function generateTimeline(quizData) {
+            const timeline = document.getElementById('studyTimeline');
+            const weeks = getTimelineWeeks(quizData.timeline);
+            const weakSection = quizData.weakSection;
+            
+            let timelineHTML = '';
+            
+            for (let i = 0; i < weeks; i++) {
+                const weekNum = i + 1;
+                const phase = getPhase(weekNum, weeks);
+                const focus = getWeeklyFocus(weekNum, weakSection, weeks);
+                
+                timelineHTML += `
+                    <div class="timeline-item">
+                        <div class="timeline-week">Week ${weekNum}: ${phase}</div>
+                        <div class="timeline-content">
+                            <p><strong>Focus:</strong> ${focus}</p>
+                            <p><strong>Daily Time:</strong> ${getStudyTimeText(quizData.studyTime)}</p>
+                            <p><strong>Key Activities:</strong> ${getKeyActivities(weekNum, weakSection, weeks)}</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            timeline.innerHTML = timelineHTML;
+        }
+
+        function getTimelineWeeks(timeline) {
+            switch(timeline) {
+                case 'urgent': return 4;
+                case 'moderate': return 6;
+                case 'relaxed': return 12;
+                default: return 6;
+            }
+        }
+
+        function getPhase(weekNum, totalWeeks) {
+            if (weekNum <= totalWeeks * 0.3) return 'Foundation Building';
+            if (weekNum <= totalWeeks * 0.7) return 'Skill Development';
+            return 'Test Preparation';
+        }
+
+        function getWeeklyFocus(weekNum, weakSection, totalWeeks) {
+            const phase = getPhase(weekNum, totalWeeks);
+            
+            if (phase === 'Foundation Building') {
+                return `Mastering ${weakSection} fundamentals and building vocabulary`;
+            } else if (phase === 'Skill Development') {
+                return `Intensive practice in ${weakSection} with timed exercises`;
+            } else {
+                return `Full mock tests and final ${weakSection} refinement`;
+            }
+        }
+
+        function getKeyActivities(weekNum, weakSection, totalWeeks) {
+            const phase = getPhase(weekNum, totalWeeks);
+            
+            if (phase === 'Foundation Building') {
+                return `Daily ${weakSection} drills, vocabulary building, grammar review`;
+            } else if (phase === 'Skill Development') {
+                return `Timed practice tests, error analysis, speaking practice`;
+            } else {
+                return `Full mock tests, final review, confidence building`;
+            }
+        }
+
+        // Example usage:
+        // populatePDF({
+        //     firstName: 'John',
+        //     targetScore: '7.5',
+        //     timeline: 'moderate',
+        //     weakSection: 'writing',
+        //     studyTime: 'moderate',
+        //     challenge: 'no structured plan'
+        // });
+    </script>
+</body>
+</html>

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Perfect IELTS Study Plan in 2 Minutes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .hero {
+            padding: 80px 0 120px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hero p {
+            font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+            font-weight: 400;
+            margin-bottom: 48px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            margin: -60px auto 0;
+            max-width: 800px;
+            position: relative;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .quiz-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+
+        .quiz-subtitle {
+            font-size: 1.125rem;
+            color: #6b7280;
+            margin-bottom: 32px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 32px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 32px;
+        }
+
+        .question {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        .question h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .options {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .option {
+            background: #f8fafc;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: left;
+            position: relative;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .option.selected::after {
+            content: '✓';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 32px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+            margin-top: 24px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .email-form {
+            display: none;
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 32px;
+            margin: 32px 0;
+            border: 2px solid #e5e7eb;
+        }
+
+        .email-form.active {
+            display: block;
+        }
+
+        .email-form h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .email-form p {
+            color: #6b7280;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .results {
+            display: none;
+            text-align: center;
+            padding: 48px 0;
+        }
+
+        .results.active {
+            display: block;
+        }
+
+        .results h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+        }
+
+        .results p {
+            font-size: 1.25rem;
+            color: #6b7280;
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: grid;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 20px 32px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 18px 32px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .cta-primary:hover, .cta-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 16px;
+            }
+            
+            .quiz-container {
+                padding: 32px 24px;
+                margin: -40px auto 0;
+            }
+            
+            .hero {
+                padding: 60px 0 80px;
+            }
+            
+            .option {
+                padding: 16px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>Find Your Perfect IELTS Study Plan in 2 Minutes</h1>
+            <p>Get a personalized roadmap to your target band score with expert strategies tailored to your weaknesses and timeline</p>
+        </div>
+
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h2 class="quiz-title">IELTS Study Plan Quiz</h2>
+                <p class="quiz-subtitle">Answer 6 quick questions to get your custom study roadmap</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-text" id="progressText">Question 1 of 6</div>
+            </div>
+
+            <form id="quizForm">
+                <!-- Question 1: Target Score -->
+                <div class="question active" data-question="1">
+                    <h3>What band score do you need for your goals?</h3>
+                    <div class="options">
+                        <div class="option" data-value="6.5">6.5 - Good for most universities</div>
+                        <div class="option" data-value="7.0">7.0 - Required for many top programs</div>
+                        <div class="option" data-value="7.5">7.5 - Competitive for top universities</div>
+                        <div class="option" data-value="8.0">8.0+ - For highly competitive programs</div>
+                    </div>
+                </div>
+
+                <!-- Question 2: Timeline -->
+                <div class="question" data-question="2">
+                    <h3>When is your IELTS test date?</h3>
+                    <div class="options">
+                        <div class="option" data-value="urgent">1-4 weeks - I need to act fast!</div>
+                        <div class="option" data-value="moderate">1-2 months - Good planning time</div>
+                        <div class="option" data-value="relaxed">3+ months - I can take my time</div>
+                    </div>
+                </div>
+
+                <!-- Question 3: Weak Section -->
+                <div class="question" data-question="3">
+                    <h3>Which section worries you most?</h3>
+                    <div class="options">
+                        <div class="option" data-value="listening">Listening - I struggle with accents and speed</div>
+                        <div class="option" data-value="reading">Reading - Time management and complex texts</div>
+                        <div class="option" data-value="writing">Writing - Structure and task achievement</div>
+                        <div class="option" data-value="speaking">Speaking - Fluency and confidence</div>
+                    </div>
+                </div>
+
+                <!-- Question 4: Current Level -->
+                <div class="question" data-question="4">
+                    <h3>What's your current IELTS experience?</h3>
+                    <div class="options">
+                        <div class="option" data-value="first-time">First time - I'm completely new to IELTS</div>
+                        <div class="option" data-value="practiced">I've done practice tests but never taken the real exam</div>
+                        <div class="option" data-value="retaking">I've taken it before but need to improve my score</div>
+                    </div>
+                </div>
+
+                <!-- Question 5: Study Time -->
+                <div class="question" data-question="5">
+                    <h3>How much time can you study daily?</h3>
+                    <div class="options">
+                        <div class="option" data-value="minimal">Less than 1 hour - I'm very busy</div>
+                        <div class="option" data-value="moderate">1-2 hours - I can commit regularly</div>
+                        <div class="option" data-value="intensive">2+ hours - I can study intensively</div>
+                    </div>
+                </div>
+
+                <!-- Question 6: Biggest Obstacle -->
+                <div class="question" data-question="6">
+                    <h3>What's your biggest obstacle to reaching your target band?</h3>
+                    <div class="options">
+                        <div class="option" data-value="vocabulary">Vocabulary - I need to expand my word bank</div>
+                        <div class="option" data-value="grammar">Grammar - My accuracy needs improvement</div>
+                        <div class="option" data-value="time">Time management - I run out of time in sections</div>
+                        <div class="option" data-value="confidence">Confidence - I panic during the test</div>
+                        <div class="option" data-value="structure">No structured plan - I don't know where to start</div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn" id="nextBtn" disabled>Next Question</button>
+            </form>
+
+            <!-- Email Capture Form -->
+            <div class="email-form" id="emailForm">
+                <h3>Get Your Personalized Study Plan</h3>
+                <p>Enter your email to receive your custom IELTS roadmap + bonus prep checklist</p>
+                <form id="leadForm">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <button type="submit" class="btn">Send Me My Study Plan</button>
+                </form>
+            </div>
+
+            <!-- Results Page -->
+            <div class="results" id="results">
+                <h2>Your Study Plan is Ready!</h2>
+                <p>Check your email for your personalized IELTS roadmap. We've also sent you a bonus prep checklist to get started immediately.</p>
+                <div class="cta-buttons">
+                    <button class="cta-primary" onclick="bookConsultation()">Book Free 15-min Consultation</button>
+                    <button class="cta-secondary" onclick="joinMasterclass()">Join Next Masterclass</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 6;
+        const answers = {};
+
+        // Initialize quiz
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgress();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Option selection
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const question = this.closest('.question');
+                    const questionNumber = parseInt(question.dataset.question);
+                    
+                    // Remove previous selection
+                    question.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Select current option
+                    this.classList.add('selected');
+                    
+                    // Store answer
+                    answers[questionNumber] = this.dataset.value;
+                    
+                    // Enable next button
+                    document.getElementById('nextBtn').disabled = false;
+                });
+            });
+
+            // Next button
+            document.getElementById('nextBtn').addEventListener('click', function() {
+                if (currentQuestion < totalQuestions) {
+                    showNextQuestion();
+                } else {
+                    showEmailForm();
+                }
+            });
+
+            // Email form submission
+            document.getElementById('leadForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                submitLead();
+            });
+        }
+
+        function showNextQuestion() {
+            // Hide current question
+            document.querySelector(`.question[data-question="${currentQuestion}"]`).classList.remove('active');
+            
+            // Show next question
+            currentQuestion++;
+            document.querySelector(`.question[data-question="${currentQuestion}"]`).classList.add('active');
+            
+            // Update progress
+            updateProgress();
+            
+            // Disable next button
+            document.getElementById('nextBtn').disabled = true;
+        }
+
+        function showEmailForm() {
+            // Hide quiz
+            document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+            document.getElementById('nextBtn').style.display = 'none';
+            
+            // Show email form
+            document.getElementById('emailForm').classList.add('active');
+        }
+
+        function submitLead() {
+            const formData = new FormData(document.getElementById('leadForm'));
+            const leadData = {
+                firstName: formData.get('firstName'),
+                email: formData.get('email'),
+                answers: answers,
+                timestamp: new Date().toISOString()
+            };
+
+            // Here you would typically send to your backend/CRM
+            console.log('Lead captured:', leadData);
+            
+            // Show results
+            showResults();
+        }
+
+        function showResults() {
+            document.getElementById('emailForm').classList.remove('active');
+            document.getElementById('results').classList.add('active');
+        }
+
+        function updateProgress() {
+            const progress = (currentQuestion / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `Question ${currentQuestion} of ${totalQuestions}`;
+        }
+
+        function bookConsultation() {
+            // Redirect to booking page or open calendar
+            alert('Redirecting to consultation booking...');
+        }
+
+        function joinMasterclass() {
+            // Redirect to masterclass signup
+            alert('Redirecting to masterclass registration...');
+        }
+    </script>
+</body>
+</html>
