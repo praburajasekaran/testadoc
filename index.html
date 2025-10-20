@@ -7,32 +7,6 @@
     <meta name="description" content="Get a personalized IELTS study plan in 2 minutes. Answer 6 quick questions and receive a custom roadmap to your target band score with expert strategies.">
     <meta name="keywords" content="IELTS, study plan, preparation, coaching, band score, personalized">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'GA_MEASUREMENT_ID');
-    </script>
-    
-    <!-- Facebook Pixel -->
-    <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', 'YOUR_PIXEL_ID');
-        fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"
-    /></noscript>
     <style>
         * {
             margin: 0;
@@ -326,6 +300,25 @@
             box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
         }
 
+        .success-message {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .success-message h3 {
+            color: #0c4a6e;
+            margin-bottom: 12px;
+        }
+
+        .success-message p {
+            color: #075985;
+            margin-bottom: 0;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -368,7 +361,12 @@
                 <div class="progress-text" id="progressText">Question 1 of 6</div>
             </div>
 
-            <form id="quizForm">
+            <form id="quizForm" name="ielts-quiz" netlify netlify-honeypot="bot-field" action="/success.html">
+                <input type="hidden" name="form-name" value="ielts-quiz" />
+                <p style="display: none;">
+                    <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                </p>
+
                 <!-- Question 1: Target Score -->
                 <div class="question active" data-question="1">
                     <h3>What band score do you need for your goals?</h3>
@@ -440,7 +438,12 @@
             <div class="email-form" id="emailForm">
                 <h3>Get Your Personalized Study Plan</h3>
                 <p>Enter your email to receive your custom IELTS roadmap + bonus prep checklist</p>
-                <form id="leadForm">
+                <form name="ielts-lead" netlify netlify-honeypot="bot-field" action="/success.html">
+                    <input type="hidden" name="form-name" value="ielts-lead" />
+                    <p style="display: none;">
+                        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                    </p>
+                    
                     <div class="form-group">
                         <label for="firstName">First Name</label>
                         <input type="text" id="firstName" name="firstName" required>
@@ -449,6 +452,7 @@
                         <label for="email">Email Address</label>
                         <input type="email" id="email" name="email" required>
                     </div>
+                    <input type="hidden" id="quizAnswers" name="quizAnswers" value="">
                     <button type="submit" class="btn">Send Me My Study Plan</button>
                 </form>
             </div>
@@ -457,6 +461,12 @@
             <div class="results" id="results">
                 <h2>Your Study Plan is Ready!</h2>
                 <p>Check your email for your personalized IELTS roadmap. We've also sent you a bonus prep checklist to get started immediately.</p>
+                
+                <div class="success-message">
+                    <h3>🎉 Thank you for taking our quiz!</h3>
+                    <p>Your personalized study plan will be delivered to your email within the next few minutes. Check your inbox and spam folder.</p>
+                </div>
+                
                 <div class="cta-buttons">
                     <button class="cta-primary" onclick="bookConsultation()">Book Free 15-min Consultation</button>
                     <button class="cta-secondary" onclick="joinMasterclass()">Join Next Masterclass</button>
@@ -474,21 +484,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             updateProgress();
             setupEventListeners();
-            
-            // Track quiz start
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'quiz_started', {
-                    event_category: 'engagement',
-                    event_label: 'ielts_quiz'
-                });
-            }
-            
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'Lead', {
-                    content_name: 'IELTS Study Plan Quiz',
-                    content_category: 'Education'
-                });
-            }
         });
 
         function setupEventListeners() {
@@ -522,9 +517,10 @@
             });
 
             // Email form submission
-            document.getElementById('leadForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                submitLead();
+            document.querySelector('form[name="ielts-lead"]').addEventListener('submit', function(e) {
+                // Store quiz answers in hidden field
+                document.getElementById('quizAnswers').value = JSON.stringify(answers);
+                showResults();
             });
         }
 
@@ -541,15 +537,6 @@
             
             // Disable next button
             document.getElementById('nextBtn').disabled = true;
-            
-            // Track question progress
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'quiz_progress', {
-                    event_category: 'engagement',
-                    event_label: 'ielts_quiz',
-                    value: currentQuestion
-                });
-            }
         }
 
         function showEmailForm() {
@@ -559,68 +546,6 @@
             
             // Show email form
             document.getElementById('emailForm').classList.add('active');
-            
-            // Track quiz completion
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'quiz_completed', {
-                    event_category: 'conversion',
-                    event_label: 'ielts_quiz',
-                    value: 1
-                });
-            }
-        }
-
-        async function submitLead() {
-            const formData = new FormData(document.getElementById('leadForm'));
-            const leadData = {
-                firstName: formData.get('firstName'),
-                email: formData.get('email'),
-                answers: answers,
-                timestamp: new Date().toISOString()
-            };
-
-            try {
-                // Show loading state
-                const submitBtn = document.querySelector('#leadForm button[type="submit"]');
-                const originalText = submitBtn.textContent;
-                submitBtn.textContent = 'Sending...';
-                submitBtn.disabled = true;
-
-                // Send to Netlify function
-                const response = await fetch('/.netlify/functions/submit-quiz', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(leadData)
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    // Show success message
-                    showResults();
-                    
-                    // Track conversion
-                    if (typeof gtag !== 'undefined') {
-                        gtag('event', 'lead_captured', {
-                            event_category: 'conversion',
-                            event_label: 'ielts_quiz',
-                            value: 10
-                        });
-                    }
-                } else {
-                    throw new Error(result.error || 'Failed to submit quiz');
-                }
-            } catch (error) {
-                console.error('Error submitting quiz:', error);
-                alert('There was an error submitting your quiz. Please try again.');
-                
-                // Reset button
-                const submitBtn = document.querySelector('#leadForm button[type="submit"]');
-                submitBtn.textContent = 'Send Me My Study Plan';
-                submitBtn.disabled = false;
-            }
         }
 
         function showResults() {
@@ -636,27 +561,13 @@
 
         function bookConsultation() {
             // Track CTA click
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'cta_click', {
-                    event_category: 'engagement',
-                    event_label: 'book_consultation'
-                });
-            }
-            
-            // Redirect to booking page or open calendar
+            console.log('Consultation booking clicked');
             window.open('https://calendly.com/your-consultation', '_blank');
         }
 
         function joinMasterclass() {
             // Track CTA click
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'cta_click', {
-                    event_category: 'engagement',
-                    event_label: 'join_masterclass'
-                });
-            }
-            
-            // Redirect to masterclass signup
+            console.log('Masterclass signup clicked');
             window.open('https://your-masterclass-signup.com', '_blank');
         }
     </script>
