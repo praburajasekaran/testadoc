@@ -7,7 +7,7 @@
 
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/index-simple.html"
   status = 200
 
 [[headers]]
@@ -32,6 +32,3 @@
   for = "*.js"
   [headers.values]
     Cache-Control = "public, max-age=31536000"
-
-[functions]
-  directory = "netlify/functions"

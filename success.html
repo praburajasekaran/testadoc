@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Your IELTS Study Plan is Ready!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .success-card {
+            background: white;
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 24px;
+        }
+
+        .success-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+
+        .success-subtitle {
+            font-size: 1.25rem;
+            color: #6b7280;
+            margin-bottom: 32px;
+        }
+
+        .success-message {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+            text-align: left;
+        }
+
+        .success-message h3 {
+            color: #0c4a6e;
+            margin-bottom: 12px;
+        }
+
+        .success-message p {
+            color: #075985;
+            margin-bottom: 8px;
+        }
+
+        .success-message ul {
+            color: #075985;
+            margin-left: 20px;
+        }
+
+        .cta-buttons {
+            display: grid;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .cta-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 20px 32px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 18px 32px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-primary:hover, .cta-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
+
+        .back-link {
+            margin-top: 32px;
+        }
+
+        .back-link a {
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .back-link a:hover {
+            color: #374151;
+        }
+
+        @media (max-width: 768px) {
+            .success-card {
+                padding: 32px 24px;
+            }
+            
+            .success-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-card">
+            <div class="success-icon">🎉</div>
+            <h1 class="success-title">Thank You!</h1>
+            <p class="success-subtitle">Your personalized IELTS study plan is on its way</p>
+            
+            <div class="success-message">
+                <h3>What happens next:</h3>
+                <ul>
+                    <li>Check your email for your personalized study plan</li>
+                    <li>Look in your spam folder if you don't see it within 5 minutes</li>
+                    <li>Follow the week-by-week roadmap tailored to your goals</li>
+                    <li>Use the bonus prep checklist to get started immediately</li>
+                </ul>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="https://calendly.com/your-consultation" class="cta-primary" target="_blank">
+                    Book Free 15-min Consultation
+                </a>
+                <a href="https://your-masterclass-signup.com" class="cta-secondary" target="_blank">
+                    Join Next Masterclass
+                </a>
+            </div>
+
+            <div class="back-link">
+                <a href="/">← Take the quiz again</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
